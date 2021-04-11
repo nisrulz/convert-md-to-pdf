@@ -1,5 +1,6 @@
 # Convert Markdown to PDF
 
+[Read blogpost](https://crushingcode.nisrulz.com/posts/how-to-convert-markdown-to-pdf/)
 
 ## Installation
 
@@ -9,13 +10,47 @@ Install [Puppeteer](https://github.com/puppeteer/puppeteer):
 npm i  puppeteer
 ```
 
+Install [Grip](https://github.com/joeyespo/grip):
 
-# Render to PDF
+```sh
+pip3 install grip
+```
+
+## Convert Markdown to HTML
+
+```sh
+cat example_doc.md | grip - --export example_doc.html
+```
+
+## Render HTML to PDF
 
 Pass the HTML file as cmdline argument before running the `renderToPdf.js` script.
 
 ```sh
-node renderToPdf.js integration_guide.html
+node renderToPdf.js example_doc.html
+```
+
+## Direct MD ➡️ PDF
+
+Drop this in your `~/.bashrc` or `~/.zshrc` file
+
+```sh
+# Convert Markdown to PDF
+# Use as: convertMarkdownToPdf your_markdown_file.md
+function convertMarkdownToPdf(){
+    if [[ $1 == *".md"* ]]; then
+        # Filename without extension
+        local FILE_NAME=$(basename "$1" .md)
+        # Read the markdown file and then convert it to an HTML file
+        cat $FILE_NAME.md | grip - --export $FILE_NAME.html 
+        # Render HTML to PDF
+        node renderToPdf.js  $FILE_NAME.html
+        # Open the generated PDF file
+        open $FILE_NAME.pdf
+ else
+        echo "Passed file is not of markdown type. Please pass a .md file"
+    fi
+}
 ```
 
 ## License
