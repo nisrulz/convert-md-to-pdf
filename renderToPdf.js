@@ -16,6 +16,7 @@ const puppeteer = require('puppeteer');
     await page.goto(filePath, { waitUntil: 'networkidle0' });
     await page.pdf({
         path: outputHtmlFileName,
+        printBackground: true,
         format: 'A4',
         margin: {
             left: "40px",
