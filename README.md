@@ -46,8 +46,14 @@ function convertMarkdownToPdf(){
         # Render HTML to PDF
         node renderToPdf.js  $FILE_NAME.html
         # Open the generated PDF file
-        open $FILE_NAME.pdf
- else
+        if [ `uname` == "Darwin" ]; then
+            # macOS
+            open $FILE_NAME.pdf
+        else
+            # Linux
+            xdg-open $FILE_NAME.pdf
+        fi
+    else
         echo "Passed file is not of markdown type. Please pass a .md file"
     fi
 }
