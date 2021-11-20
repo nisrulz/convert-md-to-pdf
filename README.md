@@ -90,7 +90,7 @@ function convertMarkdownToPdf(){
         cat $FILE_NAME.md | grip - --export $TEMP_FILE
         # Render HTML to PDF
         node renderToPdf.js $TEMP_FILE
-        #Remove intermediate html file
+        # Remove intermediate html file
         rm $TEMP_FILE
 
          if [[ $2 == "--open" ]]; then
