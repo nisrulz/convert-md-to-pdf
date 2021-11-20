@@ -93,7 +93,7 @@ function convertMarkdownToPdf(){
         # Remove intermediate html file
         rm $TEMP_FILE
 
-         if [[ $2 == "--open" ]]; then
+        if [[ $2 == "--open" ]]; then
           # Open the generated output file
           openFile $FILE_NAME.pdf
         fi
