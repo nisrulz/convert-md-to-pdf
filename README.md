@@ -4,7 +4,7 @@
 
 ## Installation
 
-Install [Puppeteer](https://github.com/puppeteer/puppeteer): 
+Install [Puppeteer](https://github.com/puppeteer/puppeteer):
 
 ```sh
 npm list -g | grep puppeteer || npm install -g puppeteer --no-shrinkwrap
@@ -13,6 +13,8 @@ npm list -g | grep puppeteer || npm install -g puppeteer --no-shrinkwrap
 Install [Grip](https://github.com/joeyespo/grip):
 
 ```sh
+python3 -m venv venv
+source venv/bin/activate 
 pip3 install grip
 ```
 
