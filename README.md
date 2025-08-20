@@ -1,6 +1,6 @@
 # Convert Markdown to PDF
 
-[Read blogpost](https://crushingcode.nisrulz.com/posts/how-to-convert-markdown-to-pdf/)
+[Read blogpost](https://crushingcode.nisrulz.com/blog/how-to-convert-markdown-to-pdf/)
 
 ## Installation
 
