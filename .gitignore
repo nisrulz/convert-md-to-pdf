@@ -106,3 +106,4 @@ dist
 # Generated files
 *.html
 *.pdf
+.DS_Store
