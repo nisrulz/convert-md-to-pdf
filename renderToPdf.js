@@ -1,27 +1,38 @@
+const { pathToFileURL } = require('node:url');
 const puppeteer = require('puppeteer');
 
-(async () => {
-    // Get the cmdline arguments
-    const myArgs = process.argv.slice(2);
-    // The first argument is the HTML file
-    const inputHtmlFile = myArgs[0]
-    // Extract the filename from input file, to create the output filename
-    const outputHtmlFileName = inputHtmlFile.replace(/\.[^/.]+$/, "") + '.pdf'
-    // Prepare the file path
-    const filePath = 'file:///' + __dirname + '/' + inputHtmlFile
+async function renderToPdf(inputHtmlFile) {
+    if (typeof inputHtmlFile !== 'string' || inputHtmlFile.length === 0) {
+        throw new TypeError('An HTML file path is required.');
+    }
 
-    // Launch the headless browser
+    const outputPdfFile = inputHtmlFile.replace(/\.[^/.]+$/, '') + '.pdf';
     const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(filePath, { waitUntil: 'networkidle0' });
-    await page.pdf({
-        path: outputHtmlFileName,
-        printBackground: true,
-        format: 'A4',
-        margin: {
-            left: "40px",
-            right: "40px",
-        }
+
+    try {
+        const page = await browser.newPage();
+        await page.goto(pathToFileURL(inputHtmlFile).href, { waitUntil: 'networkidle0' });
+        await page.pdf({
+            path: outputPdfFile,
+            printBackground: true,
+            format: 'A4',
+            margin: {
+                left: '40px',
+                right: '40px',
+            },
+        });
+    } finally {
+        await browser.close();
+    }
+
+    return outputPdfFile;
+}
+
+if (require.main === module) {
+    renderToPdf(process.argv[2]).catch((error) => {
+        console.error(error.message);
+        process.exitCode = 1;
     });
-    await browser.close();
-})();
+}
+
+module.exports = { renderToPdf };

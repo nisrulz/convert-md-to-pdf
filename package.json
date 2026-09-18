@@ -1,5 +1,16 @@
 {
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "test": "npm run test:coverage",
+    "test:e2e": "node --test tests",
+    "test:coverage": "c8 --check-coverage --lines 100 --functions 100 --branches 100 --statements 100 --include=renderToPdf.js node --test tests"
+  },
   "dependencies": {
-    "puppeteer": "^24.16.2"
+    "puppeteer": "^25.11.0"
+  },
+  "devDependencies": {
+    "c8": "^12.0.0"
   }
 }
