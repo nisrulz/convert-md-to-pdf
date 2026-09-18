@@ -4,10 +4,10 @@
 
 ## Installation
 
-Install [Puppeteer](https://github.com/puppeteer/puppeteer):
+Use Node.js 22.12.0 or newer. Install the npm dependencies:
 
 ```sh
-npm list -g | grep puppeteer || npm install -g puppeteer --no-shrinkwrap
+npm install
 ```
 
 Install [Grip](https://github.com/joeyespo/grip):
@@ -104,6 +104,17 @@ function convertMarkdownToPdf(){
     fi
 }
 ```
+
+## Tests
+
+Install the npm dependencies, then run the end-to-end tests:
+
+```sh
+npm install
+npm run test:e2e
+```
+
+Run `npm test` to run the same tests with 100% code coverage checks.
 
 ## License
 
